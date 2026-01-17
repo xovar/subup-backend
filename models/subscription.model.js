@@ -8,7 +8,7 @@ const subscriptionSchema = new mongoose.Schema({
         minLength: 2,
         maxLength: 100
     },
-    pric: {
+    price: {
         type: Number,
         required: [true, 'Subscription price is required'],
         min: [0, 'Must Be Grater Than 0']
@@ -79,7 +79,6 @@ subscriptionSchema.pre('save', function(next){
         this.status = 'expired'
     }
 
-    next()
 })
 
 const Subscription = mongoose.model('Subscription', subscriptionSchema);
