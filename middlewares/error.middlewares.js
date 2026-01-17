@@ -9,15 +9,15 @@ const errorMiddleware = (err, req, res, next) => {
 
         //mongoose bad object
         if(err.name === 'CastError'){
-            const message = 'Resorce not found';
+            const message = 'Resource not found';
 
-            error = new Error(message);
+            error = new Error(err);
             error.statusCode = 404;
         }
 
         //mongoose duplicate key
         if(err.code === 11000){
-            const message = 'Duplicate feild value entered';
+            const message = 'Duplicate field value entered';
             error = new Error(message);
             error.statusCode = 400
         }
@@ -25,7 +25,7 @@ const errorMiddleware = (err, req, res, next) => {
         //mongoose validation error
         if(err.name === 'ValidationError'){
             const message = Object.values(err.errors).map(val => val.message);
-            error = new Error(message.join(', '));
+            error = new Error(err);
             error.statusCode = 400
         }
 
